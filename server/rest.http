@@ -1,0 +1,56 @@
+GET http://localhost:3001/authors
+
+###
+GET http://localhost:3001/authors/654a037e8778c7c3834610d3
+
+###
+POST http://localhost:3001/authors
+Content-Type: application/json
+
+{
+    "name": "A Bardhan"
+}
+
+###
+PUT http://localhost:3001/authors/6515c8af5450578b73292933
+Content-Type: application/json
+
+{
+    "name": "Adrish Bardhan"
+}
+
+###
+DELETE http://localhost:3001/authors/6515c8af5450578b73292933
+
+###
+POST http://localhost:3001/books
+Content-Type: application/json
+
+{
+    "title": "Pahare Feluda",
+    "author": "6515939381f399c36a43b291",
+    "description": "Bengali Story Book",
+    "publishDate": "2023-09-29",
+    "pageCount": 1234
+}
+
+###
+GET http://localhost:3001/books
+
+###
+GET http://localhost:3001/books/65179c5db086cd4f0d675140
+
+###
+PUT http://localhost:3001/books/65179c5db086cd4f0d675140
+Content-Type: application/json
+
+{
+    "title": "Pahare Feluda Updated",
+    "author": "6515939381f399c36a43b291",
+    "description": "Bengali Story Book By S Roy",
+    "publishDate": "2023-10-02",
+    "pageCount": 12345
+}
+
+###
+DELETE http://localhost:3001/books/65179c5db086cd4f0d675140

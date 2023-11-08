@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: My Library
+  description: Node Mongo Express APIs
+  version: 1.0
+  servers:
+    -url: http://localhost:3001
+    description: This is my local server
+    -url: http://example.com
+    description: This is the production server
+
+paths:
+  /authors:
+    get:
+      summary: Get the list of the authors
+      description: Respond with the array of authors
+      responses:
+        200:
+          description: Successful Response
+        500:
+          description: Internal Server Error
+    post:
+      summary: Create new Author
+      description: Respond with newly created author object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        200:
+          description: Successful Response
+        500:
+          description: Internal Server Error
+
+  /authors/{id}:
+    get:
+      summary: Get author by given id
+      description: Respond with the author object
+      parameters:
+        - in: path
+          name: id
+          required: true,
+          description: Mongo Object Id
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful Response
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+    put:
+      summary: Update a Author
+      description: Respond with updated author object
+      parameters:
+        - in: path
+          name: id
+          required: true,
+          description: Mongo Object Id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        200:
+          description: Successful Response
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+    delete:
+      summary: Delete author by given id
+      description: Respond with the deleted author object
+      parameters:
+        - in: path
+          name: id
+          required: true,
+          description: Mongo Object Id
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful Response
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
