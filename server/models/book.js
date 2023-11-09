@@ -43,7 +43,7 @@ bookSchema.set('toJSON', { virtuals: true });
 // eslint-disable-next-line func-names, consistent-return
 bookSchema.virtual('coverImageFile').get(function () {
   if (this.coverImage && this.coverImageType) {
-    return `data:${this.coverImageType};charset=utf8;base64, ${this.coverImage.toString('utf8')}`;
+    return this.coverImage.toString('base64');
   }
 });
 
