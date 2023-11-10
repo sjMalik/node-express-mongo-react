@@ -2,6 +2,7 @@ const express = require('express');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const debug = require('debug')('library:authorRoute');
 const Author = require('../models/author');
+const Book = require('../models/book');
 
 const router = express.Router();
 
@@ -28,7 +29,8 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const author = await Author.findById(req.params.id);
-    res.send({ author });
+    const books = await Book.find({ author: req.params.id }).exec();
+    res.send({ author, books });
   } catch (e) {
     debug(e);
     res.status(500).send({
