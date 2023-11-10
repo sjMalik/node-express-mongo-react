@@ -1,3 +1,8 @@
+:root {
+    font-family: 'Arial, sans-serif';
+    font-size: 18px;
+}
+
 .header-nav {
     display: flex;
     flex-wrap: wrap;
@@ -35,4 +40,14 @@
 
 .author-name {
     font-size: 1.5rem;
+}
+
+.page-header {
+    font-size: 1.7rem;
+    font-weight: 300;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: 400;
 }

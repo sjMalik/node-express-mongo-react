@@ -5,6 +5,9 @@ import NewAuthor from "./components/NewAuthor";
 import Authors from "./components/Authors";
 import Author from "./components/Author";
 import UpdateAuthor from "./components/UpdateAuthor";
+import NewBook from "./components/NewBook";
+import Books from "./components/Books";
+import ViewBook from "./components/ViewBook";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
         <Route path='/authors/new' element={<NewAuthor />}></Route>
         <Route path='/authors/:id' element={<Author />}></Route>
         <Route path='/authors/:id/edit' element={<UpdateAuthor />}></Route>
+        <Route path='/books/new' element={<NewBook />}></Route>
+        <Route path='/books' element={<Books />}></Route>
+        <Route path='/books/:id' element={<ViewBook />}></Route>
       </Routes>
     </div>
   );

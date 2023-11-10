@@ -6,9 +6,11 @@ export default function Authors() {
     const [authors, setAuthors] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
+    const [indexToRemove, setIndexToRemove] = useState(null);
 
-    const openModal = (id) => {
+    const openModal = (id, index) => {
         setSelectedId(id);
+        setIndexToRemove(index);
         setShowModal(true);
     }
 
@@ -20,13 +22,17 @@ export default function Authors() {
         getAuthors().then(data => {
             setAuthors(data?.authors)
         })
-    }, [authors])
+    }, [])
 
     const removeAuthor = () => {
         closeModal();
         deleteAuthor(selectedId)
             .then(data => {
-                setAuthors([])
+                setAuthors((prevState) => {
+                    const newState = [...prevState];
+                    newState.splice(indexToRemove, 1);
+                    return newState;
+                })
             })
     }
 
@@ -58,13 +64,13 @@ export default function Authors() {
                 <div className='text-center mt-4'>No records found</div>
             ) :
                 (<div className='list-group'>
-                    {authors.map((author) => {
+                    {authors.map((author, index) => {
                         return (
-                            <li className='list-group-item'>
+                            <li key={index} className='list-group-item'>
                                 <span className='author-name mb-2'>{author.name}</span><br />
                                 <Link className='btn btn-primary' to={`/authors/${author._id}`}>View</Link>
                                 <Link className='btn btn-secondary m-2' to={`/authors/${author._id}/edit`}>Edit</Link>
-                                <button className='btn btn-danger' onClick={() => openModal(author._id)}>Delete</button>
+                                <button className='btn btn-danger' onClick={() => openModal(author._id, index)}>Delete</button>
                             </li>
                         )
                     })}
