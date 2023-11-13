@@ -102,3 +102,104 @@ paths:
           description: Not Found
         500:
           description: Internal Server Error
+
+  /books:
+    get:
+      summary: Get the list of the books
+      description: Respond with the array of books
+      responses:
+        200:
+          description: Successful Response
+        500:
+          description: Internal Server Error
+    post:
+      summary: Create new Book
+      description: Respond with newly created book object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+      responses:
+        200:
+          description: Successful Response
+        500:
+          description: Internal Server Error
+
+  /books/{id}:
+    get:
+      summary: Get book by given id
+      description: Respond with the book object
+      parameters:
+        - in: path
+          name: id
+          required: true,
+          description: Mongo Object Id
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful Response
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+    put:
+      summary: Update a Book
+      description: Respond with updated book object
+      parameters:
+        - in: path
+          name: id
+          required: true,
+          description: Mongo Object Id
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                author:
+                  type: string
+                publishDate:
+                  type: string
+                pageCount:
+                  type: string
+                description:
+                  type: string
+      responses:
+        200:
+          description: Successful Response
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+    delete:
+      summary: Delete book by given id
+      description: Respond with the deleted book object
+      parameters:
+        - in: path
+          name: id
+          required: true,
+          description: Mongo Object Id
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful Response
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error

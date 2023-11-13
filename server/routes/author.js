@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const debug = require('debug')('library:authorRoute');
@@ -29,7 +30,18 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const author = await Author.findById(req.params.id);
-    const books = await Book.find({ author: req.params.id }).exec();
+    let books = await Book.find({ author: req.params.id }).exec();
+    books = books.map((book) => ({
+      _id: book._id,
+      title: book.title,
+      description: book.description,
+      publishDate: book.publishDate,
+      pageCount: book.pageCount,
+      author: book.author,
+      createdAt: book.createdAt,
+      coverImageType: book.coverImageType,
+      coverImageFile: book.coverImageFile,
+    }));
     res.send({ author, books });
   } catch (e) {
     debug(e);

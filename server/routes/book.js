@@ -34,6 +34,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const book = await Book.findById(req.params.id).populate('author').exec();
+    delete book.coverImage;
     res.send({ book });
   } catch (e) {
     debug(e);

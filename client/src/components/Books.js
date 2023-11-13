@@ -19,21 +19,25 @@ export default function Books() {
     return (
         <div>
             <h2 className='page-header mb-3'>Book Gallery</h2>
-            <div className='row'>
-                {books.map((book, index) => (
-                    <div key={index} className='col-md-3 mb-3'>
-                        <img
-                            src={`data:image/jpeg;base64,${book.coverImageFile}`}
-                            height="300"
-                            width="250"
-                            alt=""
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => viewBook(book._id)}
-                        />
-                        <p className='mt-1 book-title'>{book.title}</p>
-                    </div>
-                ))}
-            </div>
+            {books.length === 0 ? (
+                <div className='text-center mt-4'>No records found</div>
+            ) :
+                (<div className='row'>
+                    {books.map((book, index) => (
+                        <div key={index} className='col-md-3 mb-3'>
+                            <img
+                                src={`data:image/jpeg;base64,${book.coverImageFile}`}
+                                height="300"
+                                width="250"
+                                alt=""
+                                style={{ cursor: 'pointer' }}
+                                onClick={() => viewBook(book._id)}
+                            />
+                            <p className='mt-1 book-title'>{book.title}</p>
+                        </div>
+                    ))}
+                </div>)
+            }
         </div>
     )
 }
