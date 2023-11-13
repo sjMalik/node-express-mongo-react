@@ -7,11 +7,11 @@ const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
 
-const swaggerJsDocs = YAML.load('./api.yaml');
+const swaggerJsDocs = YAML.load('./swagger.yaml');
 
 const indexRouter = require('./routes');
-const authorRouter = require('./routes/author');
-const bookRouter = require('./routes/book');
+const authorRouter = require('./routes/author.routes');
+const bookRouter = require('./routes/book.routes');
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line import/no-extraneous-dependencies, global-require

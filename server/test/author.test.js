@@ -1,13 +1,13 @@
 /* eslint-disable */
 const request = require('supertest');
-const Author = require('../models/author');
+const {AuthorModel} = require('../models');
 
 const app = require('../index');
 
 describe('Authors', () => {
     // before each test empty the author collection
     beforeEach(async () => {
-        await Author.deleteMany({});
+        await AuthorModel.deleteMany({});
     });
 
     /**
@@ -53,7 +53,7 @@ describe('Authors', () => {
                 .post('/authors')
                 .set('Accept', 'application/json')
                 .send({
-                    name: 'Test Author'
+                    name: 'Test AuthorModel'
                 })
                 .expect('Content-type', /json/)
                 .expect(200)
@@ -61,7 +61,7 @@ describe('Authors', () => {
                     expect(response.body).to.be.a('object');
                     expect(response.body).toHaveProperty('author');
                     expect(response.body.author).toHaveProperty('_id');
-                    expect(response.body.author).toHaveProperty('name').eql('Test Author');
+                    expect(response.body.author).toHaveProperty('name').eql('Test AuthorModel');
                 })
         })
     });
@@ -71,8 +71,8 @@ describe('Authors', () => {
      */
     describe('/GET authors/:id', () => {
         it('it should get a author by the given id', async () => {
-            const author = new Author({
-                name: 'Test Author'
+            const author = new AuthorModel({
+                name: 'Test AuthorModel'
             });
             author.save((err, res) => {
                 if (!err) {
@@ -84,7 +84,7 @@ describe('Authors', () => {
                             expect(response.body).to.be.a('object');
                             expect(response.body).toHaveProperty('author');
                             expect(response.body.author).toHaveProperty('_id').eql(res.author._id);
-                            expect(response.body.author).toHaveProperty('name').eql('Test Author');
+                            expect(response.body.author).toHaveProperty('name').eql('Test AuthorModel');
                         })
                 }
             })
@@ -96,8 +96,8 @@ describe('Authors', () => {
      */
     describe('/PUT authors/:id', () => {
         it('it should update a author by the given id', async () => {
-            const author = new Author({
-                name: 'Test Author'
+            const author = new AuthorModel({
+                name: 'Test AuthorModel'
             });
             author.save((err, res) => {
                 if (!err) {
@@ -105,7 +105,7 @@ describe('Authors', () => {
                         .put(`/authors/${res.author._id}`)
                         .set('Accept', 'application/json')
                         .send({
-                            name: 'Updated Test Author'
+                            name: 'Updated Test AuthorModel'
                         })
                         .expect('Content-type', /json/)
                         .expect(200)
@@ -113,7 +113,7 @@ describe('Authors', () => {
                             expect(response.body).to.be.a('object');
                             expect(response.body).toHaveProperty('author');
                             expect(response.body.author).toHaveProperty('_id').eql(res.author._id);
-                            expect(response.body.author).toHaveProperty('name').eql('Updated Test Author');
+                            expect(response.body.author).toHaveProperty('name').eql('Updated Test AuthorModel');
                         })
                 }
             })
@@ -125,8 +125,8 @@ describe('Authors', () => {
      */
     describe('/DELETE authors/:id', () => {
         it('it should delete a author by the given id', async () => {
-            const author = new Author({
-                name: 'Test Author'
+            const author = new AuthorModel({
+                name: 'Test AuthorModel'
             });
             author.save((err, res) => {
                 if (!err) {
@@ -138,7 +138,7 @@ describe('Authors', () => {
                             expect(response.body).to.be.a('object');
                             expect(response.body).toHaveProperty('author');
                             expect(response.body.author).toHaveProperty('_id').eql(res.author._id);
-                            expect(response.body.author).toHaveProperty('name').eql('Test Author');
+                            expect(response.body.author).toHaveProperty('name').eql('Test AuthorModel');
                         })
                 }
             })
