@@ -1,6 +1,6 @@
 /* eslint-disable */
 const request = require('supertest');
-const Author = require('../models/author');
+const Author = require('../models/author.model');
 
 const app = require('../index');
 

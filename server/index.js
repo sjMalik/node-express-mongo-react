@@ -10,8 +10,8 @@ const cors = require('cors');
 const swaggerJsDocs = YAML.load('./api.yaml');
 
 const indexRouter = require('./routes');
-const authorRouter = require('./routes/author');
-const bookRouter = require('./routes/book');
+const authorRouter = require('./routes/author.routes');
+const bookRouter = require('./routes/book.routes');
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line import/no-extraneous-dependencies, global-require

@@ -3,7 +3,7 @@ const express = require('express');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const debug = require('debug')('library:bookRoute');
 const multer = require('multer');
-const Book = require('../models/book');
+const Book = require('../models/book.model');
 
 const router = express.Router();
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
