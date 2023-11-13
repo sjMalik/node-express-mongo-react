@@ -7,11 +7,12 @@ const swaggerUI = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
 
-const swaggerJsDocs = YAML.load('./api.yaml');
+const swaggerJsDocs = YAML.load('./swagger.yaml');
 
 const indexRouter = require('./routes');
 const authorRouter = require('./routes/author.routes');
 const bookRouter = require('./routes/book.routes');
+const authRouter = require('./routes/auth.routes');
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line import/no-extraneous-dependencies, global-require
@@ -33,6 +34,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerJsDocs));
 app.use('/', indexRouter);
 app.use('/authors', authorRouter);
 app.use('/books', bookRouter);
+app.use('/auth', authRouter);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
