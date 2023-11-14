@@ -1,7 +1,10 @@
 const express = require('express');
 const authorController = require('../controllers/author.controller');
+const { verifyToken } = require('../middlewares');
 
 const router = express.Router();
+
+router.use(verifyToken);
 
 /**
  * Get all authors

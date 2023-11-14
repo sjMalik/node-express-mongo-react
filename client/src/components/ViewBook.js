@@ -8,7 +8,6 @@ export default function ViewBook() {
     const { id } = useParams();
     const [book, setBook] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const [selectedId, setSelectedId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +18,6 @@ export default function ViewBook() {
     }, [id]);
 
     const openModal = (id, index) => {
-        setSelectedId(id);
         setShowModal(true);
     }
 

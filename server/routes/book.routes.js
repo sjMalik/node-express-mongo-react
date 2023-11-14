@@ -2,11 +2,14 @@
 const express = require('express');
 const multer = require('multer');
 const bookController = require('../controllers/book.controller');
+const { verifyToken } = require('../middlewares');
 
 const router = express.Router();
 
 const storage = multer.memoryStorage(); // Store the file in the memory as a buffer
 const uploads = multer({ storage });
+
+router.use(verifyToken);
 
 /**
  * Get all books
