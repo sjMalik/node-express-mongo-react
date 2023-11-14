@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getAuthors } from '../services/author';
-import { createBook } from '../services/book';
+import { getAuthors } from '../../services/author';
+import { createBook } from '../../services/book';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewBook() {

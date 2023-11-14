@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { deleteAuthor, getAuthor } from '../services/author';
-import Modal from './common/Modal';
+import { deleteAuthor, getAuthor } from '../../services/author';
+import Modal from '../common/Modal';
 
 export default function Author() {
     const { id } = useParams();

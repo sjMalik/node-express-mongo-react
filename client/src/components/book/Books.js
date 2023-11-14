@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { getBooks } from '../services/book';
+import { getBooks } from '../../services/book';
 import { useNavigate } from 'react-router-dom';
 
 export default function Books() {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        getBooks().then(data => {
-            setBooks(data?.books)
-        })
-    }, []);
+    // useEffect(() => {
+    //     getBooks().then(data => {
+    //         setBooks(data?.books)
+    //     })
+    // }, []);
 
     const viewBook = (id) => {
         navigate(`/books/${id}`)

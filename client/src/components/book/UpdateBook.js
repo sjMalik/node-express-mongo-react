@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getAuthors } from '../services/author';
-import { getBook, updateBook } from '../services/book';
+import { getAuthors } from '../../services/author';
+import { getBook, updateBook } from '../../services/book';
 import { useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 

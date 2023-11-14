@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { deleteBook, getBook } from '../services/book';
+import { deleteBook, getBook } from '../../services/book';
 import { format } from 'date-fns'
-import Modal from './common/Modal';
+import Modal from '../common/Modal';
 
 export default function ViewBook() {
     const { id } = useParams();
