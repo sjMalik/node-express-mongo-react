@@ -14,7 +14,7 @@ export default function ViewBook() {
         getBook(id).then(data => {
             data.book.publishDate = format(new Date(data.book.publishDate), 'MMM d, yyyy')
             setBook(data?.book)
-        })
+        }).catch(e => { })
     }, [id]);
 
     const openModal = (id, index) => {
@@ -29,7 +29,7 @@ export default function ViewBook() {
         closeModal();
         deleteBook(id).then((res) => {
             navigate('/books')
-        })
+        }).catch(e => { })
     }
 
     return (

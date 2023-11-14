@@ -29,14 +29,14 @@ export default function Author() {
         deleteAuthor(selectedId)
             .then(data => {
                 navigate(`/authors`)
-            })
+            }).catch(e => { })
     }
 
     useEffect(() => {
         getAuthor(id).then(data => {
             setAuthor(data?.author);
             setBooks(data?.books);
-        })
+        }).catch(e => { })
     }, [id]);
 
     const viewBook = (id) => {

@@ -12,7 +12,7 @@ export default function UpdateAuthor() {
     useEffect(() => {
         getAuthor(id).then(data => {
             setAuthor(data?.author)
-        })
+        }).catch(e => { })
     }, [id])
 
     const handleInputChange = event => {
@@ -24,7 +24,7 @@ export default function UpdateAuthor() {
         e.preventDefault();
         updateAuthor(id, author).then(res => {
             navigate(`/authors/${id}`)
-        })
+        }).catch(e => { })
     }
 
     return (

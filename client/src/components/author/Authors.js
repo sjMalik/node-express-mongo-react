@@ -22,7 +22,7 @@ export default function Authors() {
     useEffect(() => {
         getAuthors().then(data => {
             setAuthors(data?.authors)
-        })
+        }).catch(e => { })
     }, [])
 
     const removeAuthor = () => {
@@ -34,7 +34,7 @@ export default function Authors() {
                     newState.splice(indexToRemove, 1);
                     return newState;
                 })
-            })
+            }).catch(e => { })
     }
 
     return (

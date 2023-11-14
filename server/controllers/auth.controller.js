@@ -29,7 +29,7 @@ exports.signin = async (req, res) => {
         });
 
         if (!user) {
-            res.status(404).send({ message: 'User Not found.' });
+            return res.status(404).send({ message: 'User Not found.' });
         }
 
         const passwordIsValid = bcrypt.compareSync(
@@ -38,7 +38,7 @@ exports.signin = async (req, res) => {
         );
 
         if (!passwordIsValid) {
-            res.status(401).send({
+            return res.status(401).send({
                 accessToken: null,
                 message: 'Invalid Password!',
             });

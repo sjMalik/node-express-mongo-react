@@ -9,7 +9,7 @@ export default function Books() {
     useEffect(() => {
         getBooks().then(data => {
             setBooks(data?.books)
-        })
+        }).catch(e => { })
     }, []);
 
     const viewBook = (id) => {

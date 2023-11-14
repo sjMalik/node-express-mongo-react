@@ -18,7 +18,7 @@ export default function NewAuthor() {
         e.preventDefault();
         createAuthor(author).then(res => {
             navigate('/authors')
-        })
+        }).catch(e => { })
     }
 
     return (

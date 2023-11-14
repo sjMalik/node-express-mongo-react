@@ -34,13 +34,13 @@ export default function UpdateBook() {
             description: book?.description,
         }, id).then(res => {
             navigate(`/books/${id}`);
-        })
+        }).catch(e => { })
     }
 
     useEffect(() => {
         getAuthors().then(data => {
             setAuthors(data?.authors)
-        })
+        }).catch(e => { })
     }, [id])
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function UpdateBook() {
                 data.book.publishDate = format(new Date(data.book.publishDate), 'yyyy-MM-dd')
             }
             setBook(data?.book)
-        })
+        }).catch(e => { })
     }, [id])
 
     return (

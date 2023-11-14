@@ -1,6 +1,6 @@
 
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import NewAuthor from "./components/author/NewAuthor";
 import Authors from "./components/author/Authors";
 import Author from "./components/author/Author";
@@ -10,32 +10,25 @@ import Books from "./components/book/Books";
 import ViewBook from "./components/book/ViewBook";
 import UpdateBook from "./components/book/UpdateBook";
 import Signup from "./components/auth/Signup";
+import Signin from "./components/auth/Signin";
+import AuthGuard from "./components/common/AuthGuard";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
     <div className='container mt-5 mb-5'>
-      <header>
-        <nav className='header-nav'>
-          <a className='header-title' href='/'>My Library</a>
-          <ul>
-            <li><a href='/authors'>Authors</a></li>
-            <li><a href='/authors/new'>New Author</a></li>
-            <li><a href='/books'>Books</a></li>
-            <li><a href='/books/new'>New Book</a></li>
-          </ul>
-        </nav>
-      </header>
-
       <Routes>
         <Route path='/signup' element={<Signup />}></Route>
-        <Route path='/authors' element={<Authors />}></Route>
-        <Route path='/authors/new' element={<NewAuthor />}></Route>
-        <Route path='/authors/:id' element={<Author />}></Route>
-        <Route path='/authors/:id/edit' element={<UpdateAuthor />}></Route>
-        <Route path='/books/new' element={<NewBook />}></Route>
-        <Route path='/books' element={<Books />}></Route>
-        <Route path='/books/:id' element={<ViewBook />}></Route>
-        <Route path='/books/:id/edit' element={<UpdateBook />}></Route>
+        <Route path='/signin' element={<Signin />}></Route>
+        <Route path='/' element={<AuthGuard Component={Dashboard} />}></Route>
+        <Route path='/authors' element={<AuthGuard Component={Authors} />}></Route>
+        <Route path='/authors/new' element={<AuthGuard Component={NewAuthor} />}></Route>
+        <Route path='/authors/:id' element={<AuthGuard Component={Author} />}></Route>
+        <Route path='/authors/:id/edit' element={<AuthGuard Component={UpdateAuthor} />}></Route>
+        <Route path='/books/new' element={<AuthGuard Component={NewBook} />}></Route>
+        <Route path='/books' element={<AuthGuard Component={Books} />}></Route>
+        <Route path='/books/:id' element={<AuthGuard Component={ViewBook} />}></Route>
+        <Route path='/books/:id/edit' element={<AuthGuard Component={UpdateBook} />}></Route>
       </Routes>
     </div>
   );

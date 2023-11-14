@@ -33,13 +33,13 @@ export default function NewBook() {
         e.preventDefault();
         createBook(book).then(res => {
             navigate('/books');
-        })
+        }).catch(e => { })
     }
 
     useEffect(() => {
         getAuthors().then(data => {
             setAuthors(data?.authors)
-        })
+        }).catch(e => { })
     }, [])
 
     return (

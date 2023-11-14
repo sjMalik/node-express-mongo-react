@@ -6,14 +6,14 @@ exports.verifyToken = async (req, res, next) => {
         let token;
         if (req.headers && !req.headers.authorization) {
             return res.status(401).json({
-                err: 'No Authorization header was found',
+                message: 'No Authorization header was found',
             });
         }
 
         const parts = req.headers.authorization.split(' ');
         if (parts.length !== 2) {
             return res.status(401).json({
-                err: 'Format is Authorization: Bearer [token]',
+                message: 'Format is Authorization: Bearer [token]',
             });
         }
 
