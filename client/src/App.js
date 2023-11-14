@@ -1,14 +1,15 @@
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import { Route, Routes } from "react-router-dom"
-import NewAuthor from "./components/NewAuthor";
-import Authors from "./components/Authors";
-import Author from "./components/Author";
-import UpdateAuthor from "./components/UpdateAuthor";
-import NewBook from "./components/NewBook";
-import Books from "./components/Books";
-import ViewBook from "./components/ViewBook";
-import UpdateBook from "./components/UpdateBook";
+import NewAuthor from "./components/author/NewAuthor";
+import Authors from "./components/author/Authors";
+import Author from "./components/author/Author";
+import UpdateAuthor from "./components/author/UpdateAuthor";
+import NewBook from "./components/book/NewBook";
+import Books from "./components/book/Books";
+import ViewBook from "./components/book/ViewBook";
+import UpdateBook from "./components/book/UpdateBook";
+import Signup from "./components/auth/Signup";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       </header>
 
       <Routes>
+        <Route path='/signup' element={<Signup />}></Route>
         <Route path='/authors' element={<Authors />}></Route>
         <Route path='/authors/new' element={<NewAuthor />}></Route>
         <Route path='/authors/:id' element={<Author />}></Route>

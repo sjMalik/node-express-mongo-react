@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createAuthor } from '../services/author';
+import { createAuthor } from '../../services/author';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewAuthor() {

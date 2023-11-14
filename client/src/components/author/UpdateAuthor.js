@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getAuthor, updateAuthor } from '../services/author';
+import { getAuthor, updateAuthor } from '../../services/author';
 
 export default function UpdateAuthor() {
     const { id } = useParams();

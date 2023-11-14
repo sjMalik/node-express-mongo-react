@@ -3,11 +3,12 @@ info:
   title: My Library
   description: Node Mongo Express APIs
   version: 1.0
-  servers:
-    -url: http://localhost:3001
-    description: This is my local server
-    -url: http://example.com
-    description: This is the production server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: X-Samanage-Authorization
+      in: header
 
 paths:
   /auth/signup:
@@ -67,6 +68,8 @@ paths:
 
   /authors:
     get:
+      security:
+        - bearerAuth: []              # Apply the BearerAuth security scheme globally
       summary: Get the list of the authors
       description: Respond with the array of authors
       responses:

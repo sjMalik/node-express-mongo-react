@@ -4,12 +4,15 @@ const express = require('express');
 const debug = require('debug')('library:bookRoute');
 const multer = require('multer');
 const Book = require('../models/book.model');
+const { verifyToken } = require('../middlewares/authentication.middleware');
 
 const router = express.Router();
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
 const storage = multer.memoryStorage(); // Store the file in the memory as a buffer
 const uploads = multer({ storage });
+
+router.use(verifyToken);
 
 /**
  * Get all books

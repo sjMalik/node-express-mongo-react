@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { deleteAuthor, getAuthors } from '../services/author';
+import { deleteAuthor, getAuthors } from '../../services/author';
 import { Link } from 'react-router-dom'
-import Modal from './common/Modal';
+import Modal from '../common/Modal';
 
 export default function Authors() {
     const [authors, setAuthors] = useState([]);

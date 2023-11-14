@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getBooks } from '../services/book';
+import { getBooks } from '../../services/book';
 import { useNavigate } from 'react-router-dom';
 
 export default function Books() {

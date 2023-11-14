@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { deleteBook, getBook } from '../services/book';
+import { deleteBook, getBook } from '../../services/book';
 import { format } from 'date-fns'
-import Modal from './common/Modal';
+import Modal from '../common/Modal';
 
 export default function ViewBook() {
     const { id } = useParams();
     const [book, setBook] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    const [selectedId, setSelectedId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +18,6 @@ export default function ViewBook() {
     }, [id]);
 
     const openModal = (id, index) => {
-        setSelectedId(id);
         setShowModal(true);
     }
 
