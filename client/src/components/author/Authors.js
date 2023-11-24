@@ -19,11 +19,11 @@ export default function Authors() {
         setShowModal(false);
     }
 
-    // useEffect(() => {
-    //     getAuthors().then(data => {
-    //         setAuthors(data?.authors)
-    //     })
-    // }, [])
+    useEffect(() => {
+        getAuthors().then(data => {
+            setAuthors(data?.authors)
+        })
+    }, [])
 
     const removeAuthor = () => {
         closeModal();

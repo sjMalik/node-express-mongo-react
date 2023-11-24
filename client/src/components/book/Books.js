@@ -6,11 +6,11 @@ export default function Books() {
     const [books, setBooks] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     getBooks().then(data => {
-    //         setBooks(data?.books)
-    //     })
-    // }, []);
+    useEffect(() => {
+        getBooks().then(data => {
+            setBooks(data?.books)
+        })
+    }, []);
 
     const viewBook = (id) => {
         navigate(`/books/${id}`)

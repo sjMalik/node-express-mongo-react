@@ -21,6 +21,7 @@ export default function Signin() {
     const handleSubmit = (e) => {
         e.preventDefault();
         signin(formData).then(data => {
+            localStorage.setItem('token', JSON.stringify(data?.token))
             navigate('/')
         }).catch(e => {
             setErrorMessage(e);
