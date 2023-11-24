@@ -45,5 +45,8 @@ exports.checkUserNameOrEmailExist = async (req, res, next) => {
         return;
     }
 
+    // eslint-disable-next-line prefer-destructuring
+    req.user = user;
+
     next();
 };

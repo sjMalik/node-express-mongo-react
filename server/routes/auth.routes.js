@@ -11,4 +11,6 @@ router.post('/signin', authController.signin);
 
 router.post('/forgotPassword', checkUserNameOrEmailExist, authController.sendForgotPasswordMail);
 
+router.post('/resetPassword', authController.resetPassword);
+
 module.exports = router;
