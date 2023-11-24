@@ -1,8 +1,10 @@
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 const debug = require('debug')('library:authController');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { UserModel } = require('../models');
+const { UserModel, ResetPassword } = require('../models');
+const { sendResetPasswordMail } = require('../utils/email');
 
 exports.signup = async (req, res) => {
     try {
@@ -60,6 +62,31 @@ exports.signin = async (req, res) => {
 
         res.send({
             token,
+        });
+    } catch (e) {
+        debug(e);
+        res.status(500).send({
+            message: 'Error in login',
+        });
+    }
+};
+
+// Send Reset Password Link
+exports.sendForgotPasswordMail = async (req, res) => {
+    const emailhash = bcrypt.hashSync(req.body.email, 8);
+    const token = Math.random().toString(36).substring(7)
+        + Math.round((new Date()).getTime() / 1000) + emailhash;
+
+    try {
+        const resetPassword = new ResetPassword({
+            email: req.body.email,
+            token,
+            siteuri: process.env.SITE_URI,
+        });
+        await resetPassword.save();
+        await sendResetPasswordMail(token, req.body.email, process.env.SITE_URI);
+        res.send({
+            message: 'Reset password link sent to registered email successfully',
         });
     } catch (e) {
         debug(e);

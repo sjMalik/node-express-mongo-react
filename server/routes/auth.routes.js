@@ -1,5 +1,5 @@
 const express = require('express');
-const { checkDuplicateUsernameOrEmail } = require('../middlewares');
+const { checkDuplicateUsernameOrEmail, checkUserNameOrEmailExist } = require('../middlewares');
 
 const router = express.Router();
 
@@ -8,5 +8,7 @@ const authController = require('../controllers/auth.controller');
 router.post('/signup', checkDuplicateUsernameOrEmail, authController.signup);
 
 router.post('/signin', authController.signin);
+
+router.post('/forgotPassword', checkUserNameOrEmailExist, authController.sendForgotPasswordMail);
 
 module.exports = router;
