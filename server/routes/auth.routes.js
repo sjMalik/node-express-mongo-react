@@ -4,6 +4,7 @@ const { checkDuplicateUsernameOrEmail, checkUserNameOrEmailExist } = require('..
 const router = express.Router();
 
 const authController = require('../controllers/auth.controller');
+const { checkResetPasswordPayload } = require('../middlewares/validation.middleware');
 
 router.post('/signup', checkDuplicateUsernameOrEmail, authController.signup);
 
@@ -11,6 +12,6 @@ router.post('/signin', authController.signin);
 
 router.post('/forgotPassword', checkUserNameOrEmailExist, authController.sendForgotPasswordMail);
 
-router.post('/resetPassword', authController.resetPassword);
+router.post('/resetPassword', checkResetPasswordPayload, authController.resetPassword);
 
 module.exports = router;

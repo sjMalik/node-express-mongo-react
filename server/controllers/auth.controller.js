@@ -113,9 +113,9 @@ exports.resetPassword = async (req, res) => {
         const document = await ResetPassword.find({
             token: req.body.token,
         });
-        const currentTimestamp = Date.now() / 1000;
-        const tokenExpiry = (new Date(document[0].timestamp).getTime() / 1000) + 600; // 10 mins
-        if (document) {
+        if (document && document.length > 0) {
+            const currentTimestamp = Date.now() / 1000;
+            const tokenExpiry = (new Date(document[0].timestamp).getTime() / 1000) + 600; // 10 mins
             if (currentTimestamp < tokenExpiry) {
                 // eslint-disable-next-line no-underscore-dangle
                 await userModel.updateOne(

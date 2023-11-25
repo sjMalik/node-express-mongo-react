@@ -20,3 +20,10 @@ export function forgotPassword(data) {
         data,
     })
 }
+
+export function resetPassword(data) {
+    return makeRequest('/auth/resetPassword', {
+        method: 'POST',
+        data
+    })
+}

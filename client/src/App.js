@@ -14,6 +14,7 @@ import Signin from "./components/auth/Signin";
 import AuthGuard from "./components/common/AuthGuard";
 import Dashboard from "./components/Dashboard";
 import ForgotPassword from "./components/auth/ForgotPassword";
+import ResetPassword from "./components/auth/ResetPassword";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/signin' element={<Signin />}></Route>
         <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
+        <Route path='/resetPassword' element={<ResetPassword />}></Route>
         <Route path='/' element={<AuthGuard Component={Dashboard} />}></Route>
         <Route path='/authors' element={<AuthGuard Component={Authors} />}></Route>
         <Route path='/authors/new' element={<AuthGuard Component={NewAuthor} />}></Route>
