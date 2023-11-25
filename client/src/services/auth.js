@@ -13,3 +13,10 @@ export function login(data) {
         data
     })
 }
+
+export function forgotPassword(data) {
+    return makeRequest('/auth/forgotPassword', {
+        method: 'POST',
+        data,
+    })
+}

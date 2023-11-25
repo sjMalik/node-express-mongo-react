@@ -1,6 +1,6 @@
 
 import "bootstrap/dist/css/bootstrap.min.css"
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import NewAuthor from "./components/author/NewAuthor";
 import Authors from "./components/author/Authors";
 import Author from "./components/author/Author";
@@ -13,6 +13,7 @@ import Signup from "./components/auth/Signup";
 import Signin from "./components/auth/Signin";
 import AuthGuard from "./components/common/AuthGuard";
 import Dashboard from "./components/Dashboard";
+import ForgotPassword from "./components/auth/ForgotPassword";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/signin' element={<Signin />}></Route>
+        <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
         <Route path='/' element={<AuthGuard Component={Dashboard} />}></Route>
         <Route path='/authors' element={<AuthGuard Component={Authors} />}></Route>
         <Route path='/authors/new' element={<AuthGuard Component={NewAuthor} />}></Route>

@@ -1,33 +1,31 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { login } from '../../services/auth';
+import { forgotPassword } from '../../services/auth';
 
-export default function Signin() {
+export default function ForgotPassword() {
     const [formData, setFormData] = useState({
         username: '',
-        password: '',
+        email: ''
     });
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate = useNavigate();
+    const [successMessage, setSucessMessage] = useState(null);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value,
-        });
-    };
+        })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSucessMessage(null);
+        setErrorMessage(null);
 
-        login(formData).then(data => {
-            console.log(data);
-            localStorage.setItem("token", JSON.stringify(data?.token));
-            navigate('/')
+        forgotPassword(formData).then(res => {
+            setSucessMessage('The password reset link is successfully sent to your registered email. Please check. The link will be valid for 10 mins')
         }).catch(e => {
-            console.log(e)
-            setErrorMessage(e)
+            setErrorMessage(e);
         })
     }
 
@@ -40,7 +38,7 @@ export default function Signin() {
             </header>
             <div className='card'>
                 <div className='card-header'>
-                    <h5>Login</h5>
+                    <h5>Forgot Password</h5>
                 </div>
                 <div className='card-body'>
                     <form onSubmit={handleSubmit}>
@@ -57,30 +55,30 @@ export default function Signin() {
                             />
                         </div>
                         <div className='mb-3'>
-                            <label className='form-label'>Password</label>
+                            <label className='form-label'>Email</label>
                             <input
-                                type='password'
+                                type='text'
                                 className='form-control'
-                                id='password'
-                                name='password'
-                                value={formData.password}
+                                id='email'
+                                name='email'
+                                value={formData.email}
                                 required
                                 onChange={handleInputChange}
                             />
                         </div>
                         {errorMessage && (
-                            <div className="alert alert-danger" role="alert">
-                                {errorMessage}
-                            </div>)}
+                            <div className='alert alert-danger'>{errorMessage}</div>
+                        )}
+                        {successMessage && (
+                            <div className='alert alert-success'>{successMessage}</div>
+                        )}
                         <div className='row'>
                             <div className='col-md-6'>
-                                <button type='submit' className='btn btn-primary'>Sign In</button>
-                                <p className='text-right mt-2'>
-                                    Dont have an account? <a style={{ textDecoration: 'none' }} href='/signup'>Register</a>
-                                </p>
+                                <button type='submit' className='btn btn-primary'>Submit</button>
+                                <button type='reset' className='btn btn-secondary m-2'>Reset</button>
                             </div>
                             <div className='col-md-6' style={{ textAlign: 'right' }}>
-                                <p className='text-right'><a style={{ textDecoration: 'none' }} href='/forgotPassword'>Forgot Password?</a></p>
+                                <p className='text-right'><a style={{ textDecoration: 'none' }} href='/signin'>Back to Login?</a></p>
                             </div>
                         </div>
                     </form>
