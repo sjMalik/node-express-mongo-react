@@ -30,3 +30,28 @@ exports.checkDuplicateUsernameOrEmail = async (req, res, next) => {
         });
     }
 };
+
+exports.checkUsernameOrEmailExist = async (req, res, next) => {
+    const user = await UserModel.findOne({
+        username: req.body.username,
+    });
+
+    if (!user) {
+        return res.status(400).send({
+            message: 'Failed! username not exist!',
+        });
+    }
+
+    const userByEmail = await UserModel.findOne({
+        email: req.body.email,
+    });
+
+    if (!userByEmail) {
+        return res.status(400).send({
+            message: 'Failed! email not exist!',
+        });
+    }
+    req.user = user;
+
+    next();
+};

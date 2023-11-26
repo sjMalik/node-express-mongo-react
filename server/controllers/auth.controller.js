@@ -2,7 +2,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { UserModel } = require('../models');
+const { UserModel, ResetPasswordModel } = require('../models');
+const { sendResetPasswordMail } = require('../utils/email');
 
 exports.signup = async (req, res) => {
     try {
@@ -62,6 +63,47 @@ exports.signin = async (req, res) => {
     } catch (e) {
         return res.status(500).send({
             message: 'Error in signin',
+        });
+    }
+};
+
+// Send Reset Password Link
+// eslint-disable-next-line consistent-return
+exports.sendForgotPasswordMail = async (req, res) => {
+    const emailHash = bcrypt.hashSync(req.body.email, 8);
+    const token = Math.random().toString(36).substring(7)
+        + Math.round(new Date().getTime() / 1000) + emailHash;
+
+    try {
+        await sendResetPasswordMail(
+            token,
+            req.user.username,
+            req.body.email,
+            process.env.SITE_URI,
+        );
+        await ResetPasswordModel.updateOne(
+            {
+                email: req.body.email,
+            },
+            {
+                $set: {
+                    email: req.body.email,
+                    token,
+                    siteuri: process.env.SITE_URI,
+                    timestamp: Date.now(),
+                },
+            },
+            {
+                upsert: true,
+            },
+        );
+
+        res.send({
+            message: 'Reset Password Link sent to the registered email successfully',
+        });
+    } catch (e) {
+        return res.status(500).send({
+            message: 'Error in Forgot Password email sending',
         });
     }
 };
