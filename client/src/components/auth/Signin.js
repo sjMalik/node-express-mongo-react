@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { signin } from '../../services/auth';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 export default function Signin() {
     const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ export default function Signin() {
     });
     const [errorMessage, setErrorMessage] = useState(null);
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleInputChange = event => {
         const { name, value } = event.target;
@@ -16,6 +19,10 @@ export default function Signin() {
             ...formData,
             [name]: value,
         })
+    }
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     }
 
     const handleSubmit = (e) => {
@@ -28,7 +35,12 @@ export default function Signin() {
         })
     }
 
-    return (
+    return (<div>
+        <header>
+            <nav className='header-nav'>
+                <a className='header-title' href='javascript:void(0)'>My Library</a>
+            </nav>
+        </header>
         <div className='card'>
             <div className='card-header'>
                 <h5>Login</h5>
@@ -49,15 +61,29 @@ export default function Signin() {
                     </div>
                     <div className='mb-3'>
                         <label className='form-label'>Password</label>
-                        <input
-                            type='password'
-                            className='form-control'
-                            id='password'
-                            name='password'
-                            required
-                            value={formData.password}
-                            onChange={handleInputChange}
-                        />
+                        <div className='input-group'>
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                className='form-control'
+                                id='password'
+                                name='password'
+                                required
+                                value={formData.password}
+                                onChange={handleInputChange}
+                            />
+                            <div className='input-group-append'>
+                                    <button
+                                        className='btn btn-outline-secondary'
+                                        type="button"
+                                        onClick={togglePasswordVisibility}
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={showPassword ? faEyeSlash : faEye}
+                                            style={{ fontSize: '1.2em' }}
+                                        />
+                                    </button>
+                                </div>
+                        </div>
                     </div>
 
                     {errorMessage && (
@@ -70,13 +96,15 @@ export default function Signin() {
                         <div className='col-md-6'>
                             <button type='submit' className='btn btn-primary'>Submit</button>
                             <button type='reset' className='btn btn-secondary m-2'>Reset</button>
+                            <p className='mt-2'>Don't have an account? <a style={{ textDecoration: 'none' }} href='/signup'>Sign Up</a></p>
                         </div>
                         <div className='col-md-6' style={{ textAlign: 'right' }}>
-                            <p>Don't have an account? <a href='/signup'>Sign Up</a></p>
+                            <p className='mt-2'><a style={{ textDecoration: 'none' }} href='/forgotPassword'>Forgot Password?</a></p>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
     )
 }

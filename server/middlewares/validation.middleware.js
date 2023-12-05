@@ -55,3 +55,21 @@ exports.checkUsernameOrEmailExist = async (req, res, next) => {
 
     next();
 };
+
+exports.checkResetPasswordPayload = async (req, res, next) => {
+    const { token, password } = req.body;
+
+    if (!token) {
+        return res.status(400).send({
+            message: 'Token is missing',
+        });
+    }
+
+    if (!password) {
+        return res.status(400).send({
+            message: 'Password is missing',
+        });
+    }
+
+    next();
+};

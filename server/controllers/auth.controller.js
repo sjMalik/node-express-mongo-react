@@ -107,3 +107,47 @@ exports.sendForgotPasswordMail = async (req, res) => {
         });
     }
 };
+
+// eslint-disable-next-line consistent-return
+exports.resetPassword = async (req, res) => {
+    try {
+        const document = await ResetPasswordModel.find({
+            token: req.body.token,
+        });
+        // Check the token valid or not
+        if (document && document.length > 0) {
+            // Get the current timestamp in sec
+            const currentTimestamp = Date.now() / 1000;
+            // token generated timestamp + 10 mins
+            const tokenExpiry = (new Date(document[0].timestamp) / 1000) + 600;
+            // Check the token is not more than 10 mins old
+            if (currentTimestamp < tokenExpiry) {
+                await UserModel.updateOne(
+                    {
+                        email: document[0].email,
+                    },
+                    {
+                        $set: {
+                            password: bcrypt.hashSync(req.body.password, 8),
+                        },
+                    },
+                );
+                res.send({
+                    message: 'Successfully reset Password',
+                });
+            } else {
+                res.status(400).send({
+                    message: 'Password Reset token has expired. Please request a new token',
+                });
+            }
+        } else {
+            res.status(400).send({
+                message: 'Token is not valid',
+            });
+        }
+    } catch (e) {
+        return res.status(500).send({
+            message: 'Error in resetting password',
+        });
+    }
+};

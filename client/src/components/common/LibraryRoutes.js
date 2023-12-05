@@ -28,7 +28,9 @@ export default function LibraryRoutes(props) {
                         <li><a href='/books'>Books</a></li>
                         <li><a href='/books/new'>New Book</a></li>
                         <li style={{ marginLeft: '4rem' }}>
-                            <button onClick={logout} className='btn btn-link btn-sm'>Log Out</button>
+                            <button style={{ textDecoration: 'none' }} onClick={logout} className='btn btn-link btn-sm'>
+                                <strong>Log Out</strong>
+                            </button>
                         </li>
                     </ul>
                 </nav>

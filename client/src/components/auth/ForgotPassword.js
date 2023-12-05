@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
-import { signup } from '../../services/auth';
-import { useNavigate } from 'react-router-dom';
+import { forgotPassword } from '../../services/auth';
 
-export default function Signup() {
+export default function ForgotPassword() {
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+        email: ''
     });
-    const [passwordMatch, setPasswordMatch] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate = useNavigate();
+    const [successMessage, setSuccessMessage] = useState(null);
 
-    const handleInputChange = event => {
-        const { name, value } = event.target;
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value,
@@ -23,20 +19,17 @@ export default function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setPasswordMatch(true);
 
-        // Check if password match
-        if (formData.password !== formData.confirmPassword) {
-            setPasswordMatch(false);
-            return
-        }
+        setErrorMessage(null);
+        setSuccessMessage(null);
 
-        signup(formData).then(data => {
-            navigate('/signin')
+        forgotPassword(formData).then(res => {
+            setSuccessMessage('The Password reset link is successfully sent to your registered email. Please check. The link will be valid for 10 minutes')
         }).catch(e => {
             setErrorMessage(e);
         })
     }
+
     return (
         <div>
             <header>
@@ -46,7 +39,7 @@ export default function Signup() {
             </header>
             <div className='card'>
                 <div className='card-header'>
-                    <h5>Registration</h5>
+                    <h5>Forgot Password</h5>
                 </div>
                 <div className='card-body'>
                     <form onSubmit={handleSubmit}>
@@ -74,37 +67,15 @@ export default function Signup() {
                                 onChange={handleInputChange}
                             />
                         </div>
-                        <div className='mb-3'>
-                            <label className='form-label'>Password</label>
-                            <input
-                                type='password'
-                                className='form-control'
-                                id='password'
-                                name='password'
-                                required
-                                value={formData.password}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className='mb-3'>
-                            <label className='form-label'>Confirm Password</label>
-                            <input
-                                type='password'
-                                className='form-control'
-                                id='confirmPassword'
-                                name='confirmPassword'
-                                required
-                                value={formData.confirmPassword}
-                                onChange={handleInputChange}
-                            />
-                            {!passwordMatch && (
-                                <p style={{ color: 'red' }}>Password do not match!</p>
-                            )}
-                        </div>
 
-                        {passwordMatch && errorMessage && (
+                        {errorMessage && (
                             <div className='alert alert-danger'>
                                 {errorMessage}
+                            </div>
+                        )}
+                        {successMessage && (
+                            <div className='alert alert-success'>
+                                {successMessage}
                             </div>
                         )}
 
@@ -114,7 +85,7 @@ export default function Signup() {
                                 <button type='reset' className='btn btn-secondary m-2'>Reset</button>
                             </div>
                             <div className='col-md-6' style={{ textAlign: 'right' }}>
-                                <p>Already have an account? <a style={{textDecoration: 'none'}} href='/signin'>Sign In</a></p>
+                                <p><a style={{textDecoration: 'none'}} href='/signin'>Back to Login</a></p>
                             </div>
                         </div>
                     </form>

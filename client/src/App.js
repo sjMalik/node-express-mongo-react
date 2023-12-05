@@ -13,6 +13,8 @@ import Signup from "./components/auth/Signup";
 import Signin from "./components/auth/Signin";
 import Dashboard from "./components/Dashboard";
 import LibraryRoutes from "./components/common/LibraryRoutes";
+import ForgotPassword from "./components/auth/ForgotPassword";
+import ResetPassword from "./components/auth/ResetPassword";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
       <Routes>
         <Route path='/signup' element={<Signup />}></Route>
         <Route path='/signin' element={<Signin />}></Route>
+        <Route path='/forgotPassword' element={<ForgotPassword />}></Route>
+        <Route path='/resetPassword' element={<ResetPassword />}></Route>
         <Route path='/' element={<LibraryRoutes Component={Dashboard} />}></Route>
         <Route path='/authors' element={<LibraryRoutes Component={Authors} />}></Route>
         <Route path='/authors/new' element={<LibraryRoutes Component={NewAuthor} />}></Route>

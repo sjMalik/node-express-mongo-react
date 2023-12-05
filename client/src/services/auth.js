@@ -13,3 +13,17 @@ export function signin(data) {
         data
     })
 }
+
+export function forgotPassword(data) {
+    return makeRequest('/auth/forgotPassword', {
+        method: 'POST',
+        data
+    })
+}
+
+export function resetPassword(data) {
+    return makeRequest('/auth/resetPassword', {
+        method: 'POST',
+        data
+    })
+}
