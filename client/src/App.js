@@ -15,6 +15,8 @@ import AuthGuard from "./components/common/AuthGuard";
 import Dashboard from "./components/Dashboard";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
+import NotFound from "./components/common/NotFound";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -33,7 +35,10 @@ function App() {
         <Route path='/books' element={<AuthGuard Component={Books} />}></Route>
         <Route path='/books/:id' element={<AuthGuard Component={ViewBook} />}></Route>
         <Route path='/books/:id/edit' element={<AuthGuard Component={UpdateBook} />}></Route>
+        {/* 404 Not Found Route */}
+        <Route path='*' element={<NotFound />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

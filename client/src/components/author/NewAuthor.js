@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { createAuthor } from '../../services/author';
 import { useNavigate } from 'react-router-dom';
+import { ToastService } from '../common/ToastService';
 
 export default function NewAuthor() {
     const initialUserState = {
@@ -17,8 +18,11 @@ export default function NewAuthor() {
     const handleSubmit = (e) => {
         e.preventDefault();
         createAuthor(author).then(res => {
+            ToastService.success('Successfully Author Created')
             navigate('/authors')
-        }).catch(e => { })
+        }).catch(e => {
+            ToastService.error(e)
+        })
     }
 
     return (

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../../services/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { ToastService } from '../common/ToastService';
 
 export default function Signin() {
     const [formData, setFormData] = useState({
@@ -31,6 +32,7 @@ export default function Signin() {
         login(formData).then(data => {
             console.log(data);
             localStorage.setItem("token", JSON.stringify(data?.token));
+            ToastService.success('Successfully logged')
             navigate('/')
         }).catch(e => {
             console.log(e)
